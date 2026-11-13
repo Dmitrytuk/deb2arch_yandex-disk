@@ -1,0 +1,12 @@
+# Debian-скрипты yandex-disk только добавляют/удаляют APT-репозиторий и ключ
+# (apt-key, /etc/apt/sources.list.d) - в Arch это не нужно.
+# Из всей логики осталась полезной одна вещь: остановка демона перед
+# обновлением и удалением (аналог `killall -qw yandex-disk` из prerm).
+
+pre_upgrade() {
+  pkill -x yandex-disk >/dev/null 2>&1 || true
+}
+
+pre_remove() {
+  pkill -x yandex-disk >/dev/null 2>&1 || true
+}
